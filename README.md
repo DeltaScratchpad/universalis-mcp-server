@@ -2,6 +2,32 @@
 
 MCP server for FFXIV market data via Universalis + Saddlebag Exchange, plus XIVAPI item lookup.
 
+## Claude Code plugin (this fork)
+
+This fork also packages the server as a Claude Code plugin, `ffxiv-market`, which adds:
+
+- **`ffxiv_rank_food_value`** tool: the top N meals for a job (BRD, Bard or Archer all work), priced from live listings across worlds/DCs (default EU: Chaos + Light) and ranked by gil per relevant capped stat point. Vitality is ignored.
+- **`ffxiv-food-value`** skill: tells Claude when and how to use the tool, with a job/class lookup reference (`skills/ffxiv-food-value/references/jobs.md`).
+
+Install (replace `<owner>` with your GitHub username):
+
+```
+/plugin marketplace add <owner>/universalis-mcp-server
+/plugin install ffxiv-market@ffxiv-market-tools
+```
+
+Then ask something like *"cheapest good food for Bard on EU?"*.
+
+The plugin runs `server/bundle/index.mjs`, a single self-contained build that's committed so installing from git needs no `npm install`. It needs Node 20 or later. After changing `src/`, rebuild and commit it:
+
+```
+pnpm install
+pnpm test      # tsc build + node:test suite
+pnpm bundle    # regenerates server/bundle/index.mjs
+```
+
+The plugin's `.mcp.json` pins `WIKI_FETCH_MODE=local`, so wiki content comes only from the bundled snapshots.
+
 ## Capabilities
 
 This MCP server exposes read-only tools for Universalis market data, Saddlebag Exchange analytics, and XIVAPI item lookup.

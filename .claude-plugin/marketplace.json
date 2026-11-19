@@ -1,0 +1,14 @@
+{
+  "name": "ffxiv-market-tools",
+  "description": "FFXIV market board tools for Claude Code: Universalis/Saddlebag/XIVAPI MCP server and a best-value food skill.",
+  "owner": {
+    "name": "Fork owner"
+  },
+  "plugins": [
+    {
+      "name": "ffxiv-market",
+      "source": "./",
+      "description": "FFXIV market board MCP server and best-value food skill."
+    }
+  ]
+}

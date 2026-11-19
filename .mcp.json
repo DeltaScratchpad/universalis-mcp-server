@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "universalis": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/server/bundle/index.mjs"],
+      "env": {
+        "WIKI_FETCH_MODE": "local",
+        "UNIVERSALIS_MCP_USER_AGENT": "ffxiv-market-plugin"
+      }
+    }
+  }
+}

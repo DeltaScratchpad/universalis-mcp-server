@@ -1,0 +1,11 @@
+{
+  "name": "ffxiv-market",
+  "version": "0.1.0",
+  "description": "FFXIV market board tools (Universalis, Saddlebag Exchange, XIVAPI) plus a skill for finding the best-value food for your job on EU data centers.",
+  "author": {
+    "name": "Jakub Mucha (upstream); fork maintained by you"
+  },
+  "repository": "https://github.com/drptbl/universalis-mcp-server",
+  "license": "ISC",
+  "keywords": ["ffxiv", "universalis", "market-board", "food", "mcp"]
+}

@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import pkg from "../package.json" with { type: "json" };
 import { SERVER_INSTRUCTIONS } from "./instructions.js";
 import { createClients } from "./services/clients.js";
+import { registerFoodTools } from "./tools/food.js";
 import { registerLookupTools } from "./tools/lookup.js";
 import { registerMarketTools } from "./tools/market.js";
 import { registerReferenceTools } from "./tools/reference.js";
@@ -49,6 +50,7 @@ async function main() {
   registerSaddlebagTools(server, clients);
   registerWikiTools(server);
   registerWorkflowTools(server, clients);
+  registerFoodTools(server, clients);
 
   server.registerPrompt(
     "universalis_usage_guide",

@@ -77,6 +77,38 @@ export class XivapiClient {
     return data;
   }
 
+  /**
+   * Run a search and follow `next` cursors until exhausted or `maxResults` is reached.
+   * Follow-up pages send only the cursor plus fields/limit, as XIVAPI expects.
+   */
+  async searchAll(params: XivapiSearchParams, maxResults = 1000) {
+    const pageLimit = params.limit ?? 100;
+    const results: unknown[] = [];
+    let page = (await this.search({ ...params, limit: pageLimit })) as {
+      results?: unknown[];
+      next?: string;
+    };
+    while (true) {
+      if (Array.isArray(page.results)) results.push(...page.results);
+      if (!page.next || results.length >= maxResults || !page.results?.length) break;
+      page = await requestJson<{ results?: unknown[]; next?: string }>({
+        baseUrl: this.baseUrl,
+        path: "/search",
+        query: this.withDefaults({
+          cursor: page.next,
+          limit: pageLimit,
+          fields: params.fields,
+          language: params.language,
+          version: params.version,
+        }),
+        limiter: this.limiter,
+        timeoutMs: this.timeoutMs,
+        userAgent: this.userAgent,
+      });
+    }
+    return results.slice(0, maxResults);
+  }
+
   async getItemById(itemId: number, params: XivapiRowParams = {}) {
     const normalized = this.withDefaults({ ...(params as unknown as Record<string, unknown>) });
     const cacheKey = JSON.stringify({ itemId, ...normalized });
