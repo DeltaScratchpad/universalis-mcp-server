@@ -25,6 +25,9 @@ Tool guide:
 - universalis_get_upload_counts_by_world: upload counts by world.
 - universalis_get_upload_history: daily upload totals for the last 30 days.
 
+Food tools:
+- ffxiv_rank_food_value: cheapest meals per relevant stat point for a job (BRD/Bard/Archer etc.) across worlds/DCs (default Chaos + Light). Use for "best value food" questions.
+
 Saddlebag tools (FFXIV):
 - saddlebag_get_listing_metrics: listing competition metrics and current listings.
 - saddlebag_get_history_metrics: aggregated history metrics and price distributions.

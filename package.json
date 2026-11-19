@@ -27,7 +27,9 @@
     "update-materia": "node scripts/update-materia-data.js",
     "update-wiki-docs": "node scripts/update-wiki-docs.mjs",
     "lint": "biome check .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "bundle": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node20 --outfile=server/bundle/index.mjs \"--banner:js=import { createRequire as __cr } from 'node:module'; const require = __cr(import.meta.url);\"",
+    "test": "pnpm build && node --test tests/*.test.mjs"
   },
   "keywords": [
     "mcp",
@@ -44,6 +46,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.11",
     "@types/node": "25.0.6",
+    "esbuild": "0.25.12",
     "typescript": "5.9.3"
   },
   "packageManager": "pnpm@10.28.0"
